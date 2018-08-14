@@ -1,0 +1,25 @@
+nav{
+    display: flex;
+    height: 50px;
+    background-color: palevioletred;
+    box-shadow: 2px 2px 5px #968a8a;
+    align-items: center;
+}
+nav div{
+    flex-grow: 1;
+    display: flex;
+}
+nav div:last-child{
+    justify-content: flex-end;
+}
+ul{
+    display: flex;
+}
+ul li{
+    margin: 0 20px;
+    list-style: none;
+}
+.title{
+    margin: 0 20px;
+    color: #FFF;
+}

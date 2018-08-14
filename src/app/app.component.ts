@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  name = "Microsoft";
+  menu = [
+    {
+      path: '/',
+      label: 'Home'
+    },
+    {
+      path: '/one',
+      label: 'One'
+    },
+    {
+      path: '/two',
+      label: 'Two'
+    }
+  ]
 }

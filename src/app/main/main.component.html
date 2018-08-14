@@ -1,0 +1,15 @@
+<div class="container">
+  <div>
+      <h1>
+          {{no}}
+        </h1>
+          <button (click)="inc()">INC</button>
+          <button (click)="no = no - 1;">DEC</button>
+  </div>
+
+  <div>
+    <!-- <img src="{{images[i]}}" alt=""> -->
+    <img [src]="images[i]" alt="">
+  </div>
+</div>
+
