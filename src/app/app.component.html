@@ -1,9 +1,153 @@
-<app-header [x]="name" [list]="menu"></app-header>
+<!-- <app-header>
 
-<app-main [interval]="5000"></app-main>
+</app-header>
+<app-body>
+
+</app-body> -->
+
+<style>
+    .my-drop-zone {
+        border: dotted 3px lightgray;
+    }
+
+    .nv-file-over {
+        border: dotted 3px red;
+    }
+
+    /* Default class applied to drop zones on over */
+
+    .another-file-over-class {
+        border: dotted 3px green;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .text-center {
+        text-align: center
+    }
+    .pad50 {
+        padding-top:50px;
+    }
+</style>
 
 
-<app-main [interval]="15000"></app-main>
 
 
-<app-footer></app-footer>
+<div class="container pad50">
+
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href>Angular2 File Upload</a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <h3>Select files</h3>
+
+
+            <input type="file" name="img" multiple (change)="onChange($event)">
+            <br/>
+        </div>
+
+
+        <div class="col-md-9"  *ngIf="files.length">
+
+            <h3>Upload Status</h3>
+            <p>Files Count: {{files.length}}</p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Select</th>
+                        <th width="40%" class="text-center">Name</th>
+                        <th>Size</th>
+                        <th width="20%" class="text-center">Is Primary</th>
+                        <th class="text-center">Actions</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let file of files">
+                        <td>
+                            <strong>{{file.number}}</strong>
+                        </td>
+                        <td>
+                                <input type="checkbox" value="">
+                            </td>
+                        <td>
+                            {{file.name}}
+                        </td>
+                        <td nowrap>{{ file.size/1024/1024 | number:'.2' }} MB</td>
+                       
+                        <td class="text-center">
+                            <label>
+                                <input type="radio" value="">
+                            </label>
+                        </td>
+                        <td nowrap>
+                            <button type="button" class="btn btn-success btn-xs" (click)="manageActions(file.id,'upload')">
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()">
+                                <span class="glyphicon glyphicon-ban-circle"></span>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs" (click)="manageActions(file.id,'delete')">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <div class="progress" style="margin-bottom: 0;">
+                                <div class="progress-bar" role="progressbar"></div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span *ngIf="file.status === 'success'">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                            <span *ngIf="file.status === 'fail'">
+                                <i class="glyphicon glyphicon-ban-circle"></i>
+                            </span>
+                           
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <div>
+                    Queue progress:
+                    <div class="progress" style="">
+                        <div class="progress-bar" role="progressbar" ></div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" >
+                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                </button>
+                <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" >
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                </button>
+                <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" >
+                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
