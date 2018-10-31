@@ -1,53 +1,8 @@
-<!-- <app-header>
-
-</app-header>
-<app-body>
-
-</app-body> -->
-
-<style>
-    .my-drop-zone {
-        border: dotted 3px lightgray;
-    }
-
-    .nv-file-over {
-        border: dotted 3px red;
-    }
-
-    /* Default class applied to drop zones on over */
-
-    .another-file-over-class {
-        border: dotted 3px green;
-    }
-
-    html,
-    body {
-        height: 100%;
-    }
-
-    table,
-    th,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    .text-center {
-        text-align: center
-    }
-    .pad50 {
-        padding-top:50px;
-    }
-</style>
-
-
-
-
 <div class="container pad50">
-
     <div class="navbar navbar-default">
         <div class="navbar-header">
             <a class="navbar-brand" href>Angular2 File Upload</a>
+            <button (click)="cancel()">cancel</button>
         </div>
     </div>
 
@@ -58,7 +13,7 @@
             <h3>Select files</h3>
 
 
-            <input type="file" name="img" multiple (change)="onChange($event)">
+            <input type="file" name="img"  multiple (change)="onChange($event)">
             <br/>
         </div>
 
@@ -96,11 +51,11 @@
                        
                         <td class="text-center">
                             <label>
-                                <input type="radio" value="">
+                                <input type="radio" id="radio_{{file.id}}" name="is_primary" (change)="onClickRadio(file)" >
                             </label>
                         </td>
                         <td nowrap>
-                            <button type="button" class="btn btn-success btn-xs" (click)="manageActions(file.id,'upload')">
+                            <button type="button" style="color:green" class="btn btn-success btn-xs" (click)="manageActions(file.id,'upload')">
                                 <span class="glyphicon glyphicon-upload"></span>
                             </button>
                             <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()">
@@ -117,10 +72,10 @@
                         </td>
                         <td class="text-center">
                             <span *ngIf="file.status === 'success'">
-                                <i class="glyphicon glyphicon-ok"></i>
+                                <i class="success-mark  glyphicon glyphicon-ok"></i>
                             </span>
                             <span *ngIf="file.status === 'fail'">
-                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                <i class="fail-mark glyphicon glyphicon-ban-circle"></i>
                             </span>
                            
                         </td>
@@ -128,14 +83,20 @@
                 </tbody>
             </table>
 
+
+           
+  
+
             <div>
                 <div>
                     Queue progress:
                     <div class="progress" style="">
-                        <div class="progress-bar" role="progressbar" ></div>
+                        <div id="myProgress" >
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" >
+                <button type="button" class="btn btn-success btn-s" (click)="uploadAllFiles()" >
                     <span class="glyphicon glyphicon-upload"></span> Upload all
                 </button>
                 <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" >
@@ -151,3 +112,4 @@
     </div>
 
 </div>
+
