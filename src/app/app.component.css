@@ -1,0 +1,60 @@
+.my-drop-zone {
+    border: dotted 3px lightgray;
+}
+
+.nv-file-over {
+    border: dotted 3px red;
+}
+
+/* Default class applied to drop zones on over */
+
+.another-file-over-class {
+    border: dotted 3px green;
+}
+
+.bar-grn {
+width: 1%;
+height: 20px;
+background-color: #4CAF50;
+}
+
+.bar-red {
+width: 1%;
+height: 20px;
+background-color:red;
+}
+#failBar {
+    width: 1%;
+    height: 20px;
+    background-color: #4CAF50;
+    }
+
+#myProgress {
+width: 100%;
+background-color: #ddd;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.text-center {
+    text-align: center
+}
+.pad50 {
+    padding-top:50px;
+}
+.success-mark {
+    color: green;
+}
+.fail-mark {
+    color: red;
+}
