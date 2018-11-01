@@ -55,7 +55,7 @@ export class AppComponent {
     formData.append('image', file);
     this.http.post('http://localhost:3000/api/uploadFile', formData, { headers: headers })
       .subscribe(response => {
-        if (response.json().message === 'success') {
+        if (response.json().resultCode === 'OK') {
           this.callLoader();
           this.files[this.id].status = 'success';
           var id = this.id + 1;
