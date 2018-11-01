@@ -25,3 +25,20 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Commands
+   For jquery
+   
+       npm install --save jquery
+
+       npm install -D @types/jquery
+
+   For Toastr message
+
+       npm install angular2-toaster
+   
+## Links
+
+   For toaster messages
+     
+       https://www.npmjs.com/package/angular2-toaster
