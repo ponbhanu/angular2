@@ -2,10 +2,9 @@
     <div class="navbar navbar-default">
         <div class="navbar-header">
             <a class="navbar-brand" href>Angular2 File Upload</a>
-            <button (click)="cancel()">cancel</button>
         </div>
     </div>
-
+    <toaster-container></toaster-container>
     <div class="row">
 
         <div class="col-md-3">
@@ -32,7 +31,6 @@
                         <th>Size</th>
                         <th width="20%" class="text-center">Is Primary</th>
                         <th class="text-center">Actions</th>
-                        <th>Progress</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -42,7 +40,7 @@
                             <strong>{{file.number}}</strong>
                         </td>
                         <td>
-                                <input type="checkbox" value="">
+                                <input type="checkbox" value="" (change)="onClickCheckBox(file)">
                             </td>
                         <td>
                             {{file.name}}
@@ -54,21 +52,10 @@
                                 <input type="radio" id="radio_{{file.id}}" name="is_primary" (change)="onClickRadio(file)" >
                             </label>
                         </td>
-                        <td nowrap>
-                            <button type="button" style="color:green" class="btn btn-success btn-xs" (click)="manageActions(file.id,'upload')">
-                                <span class="glyphicon glyphicon-upload"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()">
-                                <span class="glyphicon glyphicon-ban-circle"></span>
-                            </button>
+                        <td nowrap class="text-center">
                             <button type="button" class="btn btn-danger btn-xs" (click)="manageActions(file.id,'delete')">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
-                        </td>
-                        <td>
-                            <div class="progress" style="margin-bottom: 0;">
-                                <div class="progress-bar" role="progressbar"></div>
-                            </div>
                         </td>
                         <td class="text-center">
                             <span *ngIf="file.status === 'success'">
@@ -99,10 +86,10 @@
                 <button type="button" class="btn btn-success btn-s" (click)="uploadAllFiles()" >
                     <span class="glyphicon glyphicon-upload"></span> Upload all
                 </button>
-                <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" >
+                <button type="button" class="btn btn-warning btn-s" (click)="cancel()" >
                     <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
                 </button>
-                <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" >
+                <button type="button" class="btn btn-danger btn-s"  (click)="cancel()" >
                     <span class="glyphicon glyphicon-trash"></span> Remove all
                 </button>
             </div>
