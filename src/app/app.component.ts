@@ -1,8 +1,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-//import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import * as $ from 'jquery';
-import { ToasterService} from 'angular2-toaster';
+import { ToasterService } from 'angular2-toaster';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +18,7 @@ export class AppComponent {
   checkedFiles: any = [];
   isCheckBoxClicked: any = false;
   isRadioClicked: any = false;
-  constructor(public http: Http,public toasterService: ToasterService){
+  constructor(public http: Http, public toasterService: ToasterService) {
   }
 
   onChange(data) {
@@ -33,9 +32,11 @@ export class AppComponent {
 
   uploadFiles(type: any, i: any, selectedFiles) {
     this.id = i;
-    var file = '';
+    var file = '',
+      toFindId = '';
     if (selectedFiles && selectedFiles.length && selectedFiles.length > 0) {
       file = selectedFiles[this.id].image;
+      toFindId = selectedFiles[this.id].id;
     } else {
       this.toasterService.pop('error', 'Please select files to upload');
       return;
@@ -48,7 +49,13 @@ export class AppComponent {
     var headers = new Headers();
     for (var k = 0; k < this.files.length; k++) {
       if (this.files[k].isPrimary) {
-        headers.append('primary',this.files[k].name );
+        if (selectedFiles.indexOf(this.files[k]) > -1) {
+          headers.append('primary', this.files[k].name);
+          k = this.files.length;
+        } else {
+          this.toasterService.pop('error', 'Primary file must be a selected file');
+          return;
+        }
       }
     }
     let formData: FormData = new FormData();
@@ -57,24 +64,28 @@ export class AppComponent {
       .subscribe(response => {
         if (response.json().resultCode === 'OK') {
           this.callLoader();
-          this.files[this.id].status = 'success';
+          for (var j = 0; j < this.files.length; j++) {
+            if (this.files[j].id === toFindId) {
+              this.files[j].status = 'success';
+            }
+          }
           var id = this.id + 1;
           if (selectedFiles && selectedFiles.length && selectedFiles.length > 0) {
             if (id < selectedFiles.length) {
               this.uploadFiles('multiple', id, this.selectedFiles);
             } else {
               this.selectedFiles = [];
-              this.toasterService.pop('success','All files uploaded successfully');
-              //this.toastr.success('All files uploaded successfully');
+              this.toasterService.pop('success', 'All files uploaded successfully');
             }
-          } 
+          }
         } else if (response.json().resultCode === 'KO') {
-          $("#bar").removeClass("bar-grn");
-          $("#bar").addClass("bar-red");
           this.files[this.id].status = 'fail';
-          
-              this.toasterService.pop('error', 'Files uploading has ben stopped');
-              //this.toastr.error('Files uploading has ben stopped');
+          for (var j = 0; j < this.files.length; j++) {
+            if (this.files[j].id === toFindId) {
+              this.files[j].status = 'fail';
+            }
+          }
+          this.toasterService.pop('error', 'Files uploading has ben stopped');
         }
       });
   };
