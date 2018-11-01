@@ -63,21 +63,29 @@ export class AppComponent {
     this.http.post('http://localhost:3000/api/uploadFile', formData, { headers: headers })
       .subscribe(response => {
         if (response.json().resultCode === 'OK') {
-          this.callLoader();
-          for (var j = 0; j < this.files.length; j++) {
-            if (this.files[j].id === toFindId) {
-              this.files[j].status = 'success';
+          var lotNumber = 123;
+          var headers = new Headers();
+          lotNumber = response.json().resultObject[0].lotNumber;
+          this.http.get('http://localhost:3000/api/sendLotNumber/'+lotNumber, { headers: headers })
+          .subscribe(response => {
+             if (response.json().resultCode && response.json().resultCode === 'OK') {
+              this.callLoader();
+              for (var j = 0; j < this.files.length; j++) {
+                if (this.files[j].id === toFindId) {
+                  this.files[j].status = 'success';
+                }
+              }
+              var id = this.id + 1;
+              if (selectedFiles && selectedFiles.length && selectedFiles.length > 0) {
+                if (id < selectedFiles.length) {
+                  this.uploadFiles('multiple', id, this.selectedFiles);
+                } else {
+                  this.selectedFiles = [];
+                  this.toasterService.pop('success', 'All files uploaded successfully');
+                }
+              }
             }
-          }
-          var id = this.id + 1;
-          if (selectedFiles && selectedFiles.length && selectedFiles.length > 0) {
-            if (id < selectedFiles.length) {
-              this.uploadFiles('multiple', id, this.selectedFiles);
-            } else {
-              this.selectedFiles = [];
-              this.toasterService.pop('success', 'All files uploaded successfully');
-            }
-          }
+          });
         } else if (response.json().resultCode === 'KO') {
           this.files[this.id].status = 'fail';
           for (var j = 0; j < this.files.length; j++) {
