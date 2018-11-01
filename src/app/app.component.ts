@@ -63,17 +63,11 @@ export class AppComponent {
             if (id < selectedFiles.length) {
               this.uploadFiles('multiple', id, this.selectedFiles);
             } else {
+              this.selectedFiles = [];
               this.toasterService.pop('success','All files uploaded successfully');
               //this.toastr.success('All files uploaded successfully');
             }
-          } else if (this.files && this.files.length && this.files.length > 0) {
-            if (id < this.files) {
-              this.uploadFiles('multiple', id, this.files);
-            } else {
-              this.toasterService.pop('success','All files uploaded successfully');
-            //  this.toastr.success('All files uploaded successfully');
-            }
-          }
+          } 
         } else if (response.json().resultCode === 'KO') {
           $("#bar").removeClass("bar-grn");
           $("#bar").addClass("bar-red");
