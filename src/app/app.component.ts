@@ -1,5 +1,5 @@
 import { Component, ViewContainerRef } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import * as $ from 'jquery';
 import { ToasterService } from 'angular2-toaster';
 @Component({
@@ -20,7 +20,7 @@ export class AppComponent {
   isRadioClicked: any = false;
   disabled: any = true;
   constructor(public http: Http, public toasterService: ToasterService) {
-    //$("#submit-btn").addClass('disabled');
+   
   }
 
   onChange(data) {
@@ -61,14 +61,14 @@ export class AppComponent {
       }
     }
     let formData: FormData = new FormData();
-    formData.append('image', file);
+    formData.append('file', file);
     this.http.post('http://localhost:3000/api/uploadFile', formData, { headers: headers })
       .subscribe(response => {
         if (response.json().resultCode === 'OK') {
-          var lotNumber = 123;
+          var lotNumber = '';
           var headers = new Headers();
           lotNumber = response.json().resultObject[0].lotNumber;
-          this.http.get('http://localhost:3000/api/sendLotNumber/'+lotNumber, { headers: headers })
+          this.http.post('http://localhost:3000/api/sendLotNumber/'+lotNumber, formData, { headers: headers })
           .subscribe(response => {
              if (response.json().resultCode && response.json().resultCode === 'OK') {
               this.callLoader();
@@ -95,7 +95,7 @@ export class AppComponent {
               this.files[j].status = 'fail';
             }
           }
-          this.toasterService.pop('error', 'Files uploading has ben stopped');
+          this.toasterService.pop('error', 'Files uploading has been stopped');
         }
       });
   };
@@ -132,7 +132,6 @@ export class AppComponent {
     } else {
       this.selectedFiles.push(file);
     }
-    console.log(this.selectedFiles)
   }
 
   cancel() {
