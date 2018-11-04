@@ -18,7 +18,9 @@ export class AppComponent {
   checkedFiles: any = [];
   isCheckBoxClicked: any = false;
   isRadioClicked: any = false;
+  disabled: any = true;
   constructor(public http: Http, public toasterService: ToasterService) {
+    //$("#submit-btn").addClass('disabled');
   }
 
   onChange(data) {
@@ -60,13 +62,13 @@ export class AppComponent {
     }
     let formData: FormData = new FormData();
     formData.append('image', file);
-    this.http.post('http://10.0.1.4:8080/rfp/ic/yankees/upload', formData, { headers: headers })
+    this.http.post('http://localhost:3000/api/uploadFile', formData, { headers: headers })
       .subscribe(response => {
         if (response.json().resultCode === 'OK') {
           var lotNumber = 123;
           var headers = new Headers();
           lotNumber = response.json().resultObject[0].lotNumber;
-          this.http.post('http://10.0.1.4:8080/rfp/ic/yankees/store/'+lotNumber, formData, { headers: headers })
+          this.http.get('http://localhost:3000/api/sendLotNumber/'+lotNumber, { headers: headers })
           .subscribe(response => {
              if (response.json().resultCode && response.json().resultCode === 'OK') {
               this.callLoader();
@@ -97,6 +99,8 @@ export class AppComponent {
         }
       });
   };
+
+
   callLoader() {
     var elem = document.getElementById("bar"),
       width = 1;
@@ -146,6 +150,17 @@ export class AppComponent {
 
   uploadAllFiles() {
     this.uploadFiles('multiple', 0, this.selectedFiles);
+  }
+
+  uploadRefFile(data) {
+    if (data && data.target && data.target.files) {
+      var refFile = data.target.files;
+    }
+    if (refFile && refFile.length && refFile.length > 0) {
+      this.disabled = true;
+    } else {
+      this.disabled = false;
+    }
   }
 }
 
