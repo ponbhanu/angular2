@@ -58,3 +58,18 @@ td {
 .fail-mark {
     color: red;
 }
+.padd80 {
+    padding-top:80px;
+}
+.marTop10 {
+    margin-top:10px;
+}
+.btn-width {
+    width:100px;
+}
+.paddTop20{
+    padding-top: 20px;
+}
+.padding-btm100 {
+    padding-bottom: 100px !important;
+}
