@@ -153,14 +153,15 @@ export class AppComponent {
   }
 
   uploadRefFile(data) {
-    if (data && data.target && data.target.files) {
+    if (data && data.target && data.target.files && data.target.files.length && data.target.files.length > 0) {
       var refFile = data.target.files;
+      if (refFile) {
+        this.disabled = true;
+      } else {
+        this.disabled = false;
+      }
     }
-    if (refFile && refFile.length && refFile.length > 0) {
-      this.disabled = true;
-    } else {
-      this.disabled = false;
-    }
+    
   }
 }
 
