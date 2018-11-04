@@ -47,3 +47,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
    For toaster messages
      
        https://www.npmjs.com/package/angular2-toaster
+       
+       
+   For analytics table
+      
+       https://www.primefaces.org/primeng/#/setup
