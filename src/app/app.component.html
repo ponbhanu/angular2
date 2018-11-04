@@ -1,27 +1,19 @@
-<div class="container pad50">
+<div class="container pad50 padding-btm100">
     <div class="navbar navbar-default">
         <div class="navbar-header">
-            <a class="navbar-brand" href>Angular2 File Upload</a>
+            <a class="navbar-brand" href>File Upload</a>
         </div>
     </div>
     <toaster-container></toaster-container>
     <div class="row">
-
         <div class="col-md-3">
-
             <h3>Select files</h3>
-
-
-            <input type="file" name="img"  multiple (change)="onChange($event)">
+            <input type="file" name="img" multiple (change)="onChange($event)">
             <br/>
         </div>
-
-
-        <div class="col-md-9"  *ngIf="files.length">
-
+        <div class="col-md-9" *ngIf="files.length">
             <h3>Upload Status</h3>
             <p>Files Count: {{files.length}}</p>
-
             <table class="table">
                 <thead>
                     <tr>
@@ -40,16 +32,16 @@
                             <strong>{{file.number}}</strong>
                         </td>
                         <td>
-                                <input type="checkbox" value="" (change)="onClickCheckBox(file)">
-                            </td>
+                            <input type="checkbox" value="" (change)="onClickCheckBox(file)">
+                        </td>
                         <td>
                             {{file.name}}
                         </td>
                         <td nowrap>{{ file.size/1024/1024 | number:'.2' }} MB</td>
-                       
+
                         <td class="text-center">
                             <label>
-                                <input type="radio" id="radio_{{file.id}}" name="is_primary" (change)="onClickRadio(file)" >
+                                <input type="radio" id="radio_{{file.id}}" name="is_primary" (change)="onClickRadio(file)">
                             </label>
                         </td>
                         <td nowrap class="text-center">
@@ -64,66 +56,188 @@
                             <span *ngIf="file.status === 'fail'">
                                 <i class="fail-mark glyphicon glyphicon-ban-circle"></i>
                             </span>
-                           
+
                         </td>
                     </tr>
                 </tbody>
             </table>
-
-
-           
-  
-
             <div>
                 <div>
                     Queue progress:
                     <div class="progress" style="">
-                        <div id="myProgress" >
+                        <div id="myProgress">
                             <div id="bar" class="bar-grn"></div>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success btn-s" (click)="uploadAllFiles()" >
+                <button type="button" class="btn btn-success btn-s" (click)="uploadAllFiles()">
                     <span class="glyphicon glyphicon-upload"></span> Upload all
                 </button>
-                <button type="button" class="btn btn-warning btn-s" (click)="cancel()" >
+                <button type="button" class="btn btn-warning btn-s" (click)="cancel()">
                     <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
                 </button>
-                <button type="button" class="btn btn-danger btn-s"  (click)="cancel()" >
+                <button type="button" class="btn btn-danger btn-s" (click)="cancel()">
                     <span class="glyphicon glyphicon-trash"></span> Remove all
                 </button>
             </div>
-
+        </div>
+    </div>
+    <div class="col-md-12" *ngIf="files.length">
+        <hr>
+        <h3 class="text-center"> O C R </h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    Split status:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    OCR status:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    RFP modules:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <div class="row padd80">
+            <div class="col-md-4">
+                <div>
+                    XLS:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    Filter:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    CSV:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="col-md-12" *ngIf="files.length">
+        <hr>
+        <h3 class="text-center"> M L </h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    Clause ID Assignments:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    Train the module (Predictions):
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    Colour Coding:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="row padd80">
+            <div class="col-md-4">
+                <div>
+                    Split:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    XLS Generation:
+                    <div class="progress marTop10">
+                        <div id="myProgress">
+                            <div id="bar" class="bar-grn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" *ngIf="files.length">
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <p>Reference File</p>
+                    <a title="Download" download href="/assets/files/reference.pdf" target="_self">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-download-alt"></span> Download
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <p>Select file</p>
+                    <input type="file" name="img" (click)="uploadRefFile($event)">
+                </div>
+            </div>
+            <div class="col-md-3 text-center paddTop20">
+                <div>
+                    <button type="button" class=" disable btn btn-default btn-sm btn-primary btn-md" id="submit-btn" [disabled]="disabled"> S u b m i t
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-3 text-center paddTop20">
+                <p>Task ID:</p>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
