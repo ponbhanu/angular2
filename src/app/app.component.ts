@@ -2,6 +2,7 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import * as $ from 'jquery';
 import { ToasterService } from 'angular2-toaster';
+import {TableModule} from 'primeng/table';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +17,13 @@ export class AppComponent {
   id: any;
   selectedFiles: any = [];
   checkedFiles: any = [];
+  analyticsData: any = [];
   isCheckBoxClicked: any = false;
   isRadioClicked: any = false;
   disabled: any = true;
+  toSearchDate: any;
   constructor(public http: Http, public toasterService: ToasterService) {
-   
+    this.analyticsData = this.getDates();
   }
 
   onChange(data) {
@@ -31,6 +34,35 @@ export class AppComponent {
       }
     }
   }
+
+  getDates() {
+    return [{'no':1,'date':'11-1-2018','count':6},
+            {'no':1,'date':'11-2-2018','count':22},
+            {'no':1,'date':'11-3-2018','count':44},
+            {'no':1,'date':'11-4-2018','count':32},
+            {'no':1,'date':'10-11-2018','count':6},
+            {'no':1,'date':'10-12-2018','count':22},
+            {'no':1,'date':'10-13-2018','count':44},
+            {'no':1,'date':'10-14-2018','count':32},
+            {'no':1,'date':'10-15-2018','count':6},
+            {'no':1,'date':'10-16-2018','count':22},
+            {'no':1,'date':'10-17-2018','count':44},
+            {'no':1,'date':'10-18-2018','count':32},
+            {'no':1,'date':'10-19-2018','count':6},
+            {'no':1,'date':'10-20-2018','count':22},
+            {'no':1,'date':'10-21-2018','count':44},
+            {'no':1,'date':'10-22-2018','count':32}
+          ];
+  }
+
+  
+  onSelectDate() {
+    this.analyticsData = this.getDates();
+    this.toSearchDate = this.toSearchDate.toLocaleDateString("en-US").replace('/','-').replace('/','-');
+    if (this.toSearchDate)
+      this.analyticsData = this.analyticsData.filter((item) => item.date == this.toSearchDate);
+  }  
+
 
   uploadFiles(type: any, i: any, selectedFiles) {
     this.id = i;
@@ -141,14 +173,17 @@ export class AppComponent {
   manageActions(id, type) {
     if (type === 'delete') {
       this.files = this.files.filter((item) => item.id !== id);
-    } else if (type === 'cancel') {
-
-    }
+    } 
   }
 
 
   uploadAllFiles() {
     this.uploadFiles('multiple', 0, this.selectedFiles);
+  }
+
+  closeModal() {
+    this.analyticsData = this.getDates();
+    this.toSearchDate = '';
   }
 
   uploadRefFile(data) {
