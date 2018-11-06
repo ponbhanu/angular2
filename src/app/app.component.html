@@ -64,192 +64,199 @@
                     </tr>
                 </tbody>
             </table>
-            <div>
+            <div class="marBot30">
                 <div>
                     Queue progress:
-                    <div class="progress" style="">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-success btn-s" (click)="uploadAllFiles()">
-                    <span class="glyphicon glyphicon-upload"></span> Upload all
-                </button>
-                <button type="button" class="btn btn-warning btn-s" (click)="cancel()">
-                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                </button>
-                <button type="button" class="btn btn-danger btn-s" (click)="cancel()">
-                    <span class="glyphicon glyphicon-trash"></span> Remove all
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12" *ngIf="files.length">
-        <hr>
-        <h3 class="text-center"> O C R </h3>
-        <div class="row">
-            <div class="col-md-4">
-                <div>
-                    Split status:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
+                    <div id="myProgress">
+                        <div id="bar" class="bar-grn"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div>
-                    OCR status:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    RFP modules:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row padd80">
-            <div class="col-md-4">
-                <div>
-                    XLS:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    Filter:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    CSV:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12" *ngIf="files.length">
-        <hr>
-        <h3 class="text-center"> M L </h3>
-        <div class="row">
-            <div class="col-md-4">
-                <div>
-                    Clause ID Assignments:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    Train the module (Predictions):
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    Colour Coding:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row padd80">
-            <div class="col-md-4">
-                <div>
-                    Split:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    XLS Generation:
-                    <div class="progress marTop10">
-                        <div id="myProgress">
-                            <div id="bar" class="bar-grn"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12" *ngIf="files.length">
-        <hr>
-        <div class="row">
-            <div class="col-md-3">
-                <div>
-                    <p>Reference File</p>
-                    <a title="Download" download href="/assets/files/reference.pdf" target="_self">
-                        <button type="button" class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-download-alt"></span> Download
-                        </button>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div>
-                    <p>Select file</p>
-                    <input type="file" name="img" (click)="uploadRefFile($event)">
-                </div>
-            </div>
-            <div class="col-md-3 text-center paddTop20">
-                <div>
-                    <button type="button" class=" disable btn btn-default btn-sm btn-primary btn-md" id="submit-btn" [disabled]="disabled"> S u b m i t
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-3 text-center paddTop20">
-                <p>Task ID:</p>
-            </div>
+            <button type="button" class="btn btn-success btn-s" (click)="uploadAllFiles()">
+                <span class="glyphicon glyphicon-upload"></span> Upload all
+            </button>
+            <button type="button" class="btn btn-warning btn-s" (click)="cancel()">
+                <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+            </button>
+            <button type="button" class="btn btn-danger btn-s" (click)="cancel()">
+                <span class="glyphicon glyphicon-trash"></span> Remove all
+            </button>
         </div>
     </div>
 
+    <hr>
+    <div class="container mtop30">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active">
+                <a data-toggle="tab" href="#ocr-tab" class="ocr-tab tabBgColor" (click)="addColorsToActiveTabs('ocr-tab')">O C R</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#ml-tab" class="ml-tab" (click)="addColorsToActiveTabs('ml-tab')">M L</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#file-tab" class="file-tab" (click)="addColorsToActiveTabs('file-tab')">Reference File</a>
+            </li>
+        </ul>
 
+        <div class="tab-content">
+            <div id="ocr-tab" class="mtop30 tab-pane fade in active">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div>
+                                Split status:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                OCR status:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                RFP modules:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                XLS:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                Filter:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                CSV:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ml-tab" class="mtop30 tab-pane fade">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div>
+                                Clause ID Assignments:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                Train the module :
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                Colour Coding:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                Split:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                XLS Generation:
+                                <div class="progress marTop10">
+                                    <div id="myProgress">
+                                        <div id="bar" class="bar-grn"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="file-tab" class="mtop30 tab-pane fade">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div>
+                                <p>Reference File</p>
+                                <a title="Download" download href="/assets/files/reference.pdf" target="_self">
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-download-alt"></span> Download
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <p>Select file</p>
+                                <input type="file" name="img" (click)="uploadRefFile($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center paddTop20">
+                            <div>
+                                <button type="button" class=" disable btn btn-default btn-sm btn-primary btn-md" id="submit-btn" [disabled]="disabled"> S u b m i t
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center paddTop20">
+                            <p>Task ID:</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
@@ -281,4 +288,3 @@
 
         </div>
     </div>
-</div>
