@@ -197,6 +197,16 @@ export class AppComponent {
     }
     
   }
+  
+  addColorsToActiveTabs(tabId) {
+    var tabsArr = ['ocr-tab','ml-tab','file-tab'],
+    index = tabsArr.indexOf(tabId);
+    tabsArr.splice(index,1);
+    $('.'+tabId).addClass('tabBgColor');
+    for (var i = 0;i< tabsArr.length;i++) {
+      $('.'+tabsArr[i]).removeClass('tabBgColor');
+    }
+  }
 }
 
 
