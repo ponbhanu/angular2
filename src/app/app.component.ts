@@ -22,6 +22,9 @@ export class AppComponent {
   isRadioClicked: any = false;
   disabled: any = true;
   toSearchDate: any;
+  fileUploadTab:any = true;
+  ocrTab:any;
+  mlTab:any;
   constructor(public http: Http, public toasterService: ToasterService) {
     this.analyticsData = this.getDates();
   }
@@ -62,6 +65,8 @@ export class AppComponent {
     if (this.toSearchDate)
       this.analyticsData = this.analyticsData.filter((item) => item.date == this.toSearchDate);
   }  
+
+  
 
 
   uploadFiles(type: any, i: any, selectedFiles) {
@@ -195,16 +200,28 @@ export class AppComponent {
         this.disabled = false;
       }
     }
-    
-  }
-  
-  addColorsToActiveTabs(tabId) {
-    var tabsArr = ['ocr-tab','ml-tab','file-tab'],
+  };
+
+  onClickTabs(tabId) {
+    var tabsArr = ['fileUploadTab','ocrTab','mlTab'],
     index = tabsArr.indexOf(tabId);
     tabsArr.splice(index,1);
-    $('.'+tabId).addClass('tabBgColor');
-    for (var i = 0;i< tabsArr.length;i++) {
-      $('.'+tabsArr[i]).removeClass('tabBgColor');
+    for (var i = 0;i< tabsArr.length;i++){
+      $('#'+tabsArr[i]).removeClass('tabsBgColor');
+    };
+    $('#'+tabId).addClass('tabsBgColor');
+    if (tabId === 'fileUploadTab') {
+      this.fileUploadTab = true;
+      this.ocrTab = false;
+      this.mlTab = false;
+    } else if (tabId === 'ocrTab') {
+      this.fileUploadTab = false;
+      this.ocrTab = true;
+      this.mlTab = false;
+    } else if (tabId === 'mlTab') {
+      this.fileUploadTab = false;
+      this.ocrTab = false;
+      this.mlTab = true;
     }
   }
 }
