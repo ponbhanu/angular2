@@ -3,10 +3,12 @@ import { Http, Headers } from '@angular/http';
 import * as $ from 'jquery';
 import { ToasterService } from 'angular2-toaster';
 import {TableModule} from 'primeng/table';
+import { HttpService } from './http.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [HttpService]
 })
 export class AppComponent {
   files: any = [];
@@ -25,7 +27,8 @@ export class AppComponent {
   fileUploadTab:any = true;
   ocrTab:any;
   mlTab:any;
-  constructor(public http: Http, public toasterService: ToasterService) {
+  taskId:any;
+  constructor(public toasterService: ToasterService, public httpService:HttpService) {
     this.analyticsData = this.getDates();
   }
 
@@ -85,30 +88,31 @@ export class AppComponent {
       return;
     }
 
-    var headers = new Headers();
-    for (var k = 0; k < this.files.length; k++) {
-      if (this.files[k].isPrimary) {
-        if (selectedFiles.indexOf(this.files[k]) > -1) {
-          headers.append('primary', this.files[k].name);
-          k = this.files.length;
-        } else {
-          this.toasterService.pop('error', 'Primary file must be a selected file');
-          return;
-        }
-      }
-    }
+    var headers = this.getHeaders();
+    // for (var k = 0; k < this.files.length; k++) {
+    //   if (this.files[k].isPrimary) {
+    //     if (selectedFiles.indexOf(this.files[k]) > -1) {
+    //       headers.append('primary', this.files[k].name);
+    //       k = this.files.length;
+    //     } else {
+    //       this.toasterService.pop('error', 'Primary file must be a selected file');
+    //       return;
+    //     }
+    //   }
+    // }
     let formData: FormData = new FormData();
     formData.append('file', file);
-    this.http.post('http://localhost:3000/api/uploadFile', formData, { headers: headers })
+    this.httpService.manageHttp('post','http://localhost:3000/api/uploadFile', formData, headers)
       .subscribe(response => {
-        if (response.json().resultCode === 'OK') {
-          var lotNumber = '';
+        if (response.resultCode === 'OK') {
+          var lotNumber = 2;
           var headers = new Headers();
-          lotNumber = response.json().resultObject[0].lotNumber;
-          this.http.post('http://localhost:3000/api/sendLotNumber/'+lotNumber, formData, { headers: headers })
+          let formData: FormData = new FormData();
+          //lotNumber = response.json().resultObject[0].lotNumber;
+          this.httpService.manageHttp('post','http://localhost:3000/api/sendLotNumber/'+lotNumber, formData, headers)
           .subscribe(response => {
-             if (response.json().resultCode && response.json().resultCode === 'OK') {
-              this.callLoader();
+             if (response.resultCode && response.resultCode === 'OK') {
+              this.callLoader("bar");
               for (var j = 0; j < this.files.length; j++) {
                 if (this.files[j].id === toFindId) {
                   this.files[j].status = 'success';
@@ -125,7 +129,7 @@ export class AppComponent {
               }
             }
           });
-        } else if (response.json().resultCode === 'KO') {
+        } else if (response.resultCode === 'KO') {
           this.files[this.id].status = 'fail';
           for (var j = 0; j < this.files.length; j++) {
             if (this.files[j].id === toFindId) {
@@ -138,10 +142,10 @@ export class AppComponent {
   };
 
 
-  callLoader() {
-    var elem = document.getElementById("bar"),
-      width = 1;
-    var ids = setInterval(frame, 10);
+  callLoader(id) {
+    var elem = document.getElementById(id),
+    width = 1,
+    ids = setInterval(frame, 10);
     function frame() {
       if (width >= 100) {
         clearInterval(ids);
@@ -181,7 +185,6 @@ export class AppComponent {
     } 
   }
 
-
   uploadAllFiles() {
     this.uploadFiles('multiple', 0, this.selectedFiles);
   }
@@ -203,6 +206,7 @@ export class AppComponent {
   };
 
   onClickTabs(tabId) {
+    this.emptyFiles();
     var tabsArr = ['fileUploadTab','ocrTab','mlTab'],
     index = tabsArr.indexOf(tabId);
     tabsArr.splice(index,1);
@@ -219,10 +223,38 @@ export class AppComponent {
       this.ocrTab = true;
       this.mlTab = false;
     } else if (tabId === 'mlTab') {
+      this.asyncPredict();
       this.fileUploadTab = false;
       this.ocrTab = false;
       this.mlTab = true;
     }
+  };
+
+  asyncPredict(){
+    let formData: FormData = new FormData();
+    this.httpService.manageHttp('post','http://localhost:3000/asyncpredict', formData, this.getHeaders())
+    .subscribe(response => {
+      if (response.resultCode && response.resultCode === 'OK') {
+        this.taskId = response.resultObj.taskId;
+        var listIds = ["clause-bar","train-bar","colour-bar","split-bar","xls-bar"];
+        for (var i = 0;i< listIds.length;i++) {
+          this.callLoader(listIds[i]);
+        }
+      } else {
+        this.taskId = '';
+      }
+    });
+  };
+
+  emptyFiles(){
+    this.files = [];
+    this.list =[];
+    this.selectedFiles = [];
+  };
+
+  getHeaders() {
+    var headers = new Headers();
+    return headers;
   }
 }
 
