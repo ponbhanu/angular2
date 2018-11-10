@@ -161,7 +161,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div>
-                        Clause ID Assignments:
+                       Task Id : {{taskId}}
                         <div class="progress marTop10">
                             <div id="myProgress">
                                 <div id="clause-bar" class="bar-grn"></div>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="col-md-2">
                     <div>
-                        Train the module :
+                        Metrics :
                         <div class="progress marTop10">
                             <div id="myProgress">
                                 <div id="train-bar" class="bar-grn"></div>
@@ -181,7 +181,7 @@
                 </div>
                 <div class="col-md-2">
                     <div>
-                        Colour Coding:
+                        Status :
                         <div class="progress marTop10">
                             <div id="myProgress">
                                 <div id="colour-bar" class="bar-grn"></div>
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                     <div>
                         Split:
                         <div class="progress marTop10">
@@ -209,11 +209,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
+            </div> -->
+            <!-- <div class="col-md-3">
                 <p>Task ID:  <b>{{taskId}}</b></p>
-            </div>
+            </div> -->
         </div>
+    </div>
     </div>
 
     <div id="Tokyo" class="tabcontent" *ngIf="fileUpload">
@@ -290,6 +291,9 @@
         <div class="row">
             <div class="col-md-3">
                 <p>Task ID: </p>
+            </div>
+            <div class="col-md-3">
+                <b>{{taskId}}</b>
             </div>
         </div>
     </div>
