@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
-import { AppComponent } from './app.component';
 import {TableModule} from 'primeng/table';
 import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+import { HttpService } from './http.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     ToasterModule.forRoot()
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
